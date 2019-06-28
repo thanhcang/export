@@ -5,6 +5,11 @@ namespace App\Helpers\Lang;
 
 class Lang
 {
+    const EN = 'en';
+    const VI = 'vi';
+
+    const LIST_LANG = [self::EN, self::VI];
+
     private static $lang;
 
     private static $locate = 'en';

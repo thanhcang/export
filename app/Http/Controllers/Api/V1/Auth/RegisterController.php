@@ -20,7 +20,7 @@ class RegisterController extends ApiController
         ];
 
         $this->apiValidate($request, $rules);
-        $user = $userRepo->add($request->only(['name', 'email', 'password']));
+        $user = $userRepo->add($request->merge(['role_id' => 1])->only(['name', 'email', 'password', 'role_id']));
 
         $emailToken = $emailVerifyRepo->add([
             'user_id' => $user->id,

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features>
+    <feature>
+        <description>Roles Management</description>
+        <action>
+            <description>Created Role</description>
+            <name>CreateRole</name>
+            <permission>Roles.Created.Role</permission>
+        </action>
+        <action>
+            <description>Edit Role</description>
+            <name>EditRole</name>
+            <permission>Roles.Edit.Role</permission>
+        </action>
+        <action>
+            <description>Disable Permission</description>
+            <name>DisableRole</name>
+            <permission>Roles.Disable.Role</permission>
+        </action>
+    </feature>
+    <feature>
+        <description>List Options Management</description>
+        <action>
+            <description>Created Selects</description>
+            <name>CreateSelects</name>
+            <permission>ListsOption.Created.Selects</permission>
+        </action>
+        <action>
+            <description>Created Option</description>
+            <name>CreateOptions</name>
+            <permission>ListsOption.Created.Options</permission>
+        </action>
+    </feature>
+</features>

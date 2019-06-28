@@ -6,8 +6,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Lang\Lang;
 use App\Http\Controllers\Controller;
+use App\Policies\UserPolicy;
 use App\Traits\RequestPaginate;
 use App\Traits\Sort;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,23 @@ class ApiController extends Controller
     use RequestPaginate, RequestPaginate, Sort;
 
     protected $data = [];
+
+    protected $gateAbility = '';
+
+    protected $checkPermission = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        if ($this->checkPermission) {
+            $this->middleware(function ($request, $next) {
+                if ($this->authorize(UserPolicy::METHOD_NAME, [User::class, $this->gateAbility])) {
+                    return $next($request);
+                }
+            });
+        }
+    }
 
     protected function currentUser()
     {

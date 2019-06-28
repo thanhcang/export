@@ -2,18 +2,18 @@
 Route::group(['prefix' => 'managements', 'namespace' => 'Managements'], function () {
 
     Route::group(['prefix' => 'list-options', 'namespace' => 'ListsOption'], function () {
-        Route::post('create', 'CreateController@handle');
-        Route::post('edit/{id}', 'EditController@handle');
-        Route::post('enable/{id}', 'Enable@handle');
-        Route::post('disable/{id}', 'Disable@handle');
-        Route::group(['prefix' => 'option-title'], function () {
-            Route::post('create/{id}', 'CrateOptionTitleTrans@handle');
-            Route::post('edit', 'EditOptionTitleTrans@handle');
+
+        Route::group(['namespace' => 'Write\System'], function () {
+            Route::post('create/select', 'CreateSelectController');
         });
-        Route::get('/', 'OptionsController@handle');
+
+        Route::group(['namespace' => 'Write\Admin'], function () {
+            Route::post('create/select/option/{id}', 'CreateOptionController@handle');
+            Route::post('create/select/option/edit/{id}', 'EditOptionController@handle');
+            Route::post('create/select/option/enable/{id}', 'EnableOptionController@handle');
+            Route::post('create/select/option/disable/{id}', 'DisableOptionController@handle');
+        });
     });
 
-    Route::group(['prefix' => 'leads', 'namespace' => 'Leads'], function () {
-        Route::get('/', 'ListController@handle');
-    });
+    require api_v1_path('Managements/Roles/route.php');
 });

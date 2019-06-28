@@ -175,8 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Repositories\RepositoryService::class,
-        App\Helpers\ListOptions\ListsOptionServiceProvider::class
-
+        App\Helpers\HelperServiceProvider::class,
     ],
 
     /*

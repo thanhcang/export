@@ -4,7 +4,7 @@
 namespace App\Repositories;
 
 
-use App\Models\Managements\ListsOptions\ListsOptions;
+use App\Models\Managements\ListsSelect\ListsOptions;
 use App\Repositories\Contracts\ListsOptionsContract;
 
 class ListsOptionsRepo extends BaseRepo implements ListsOptionsContract

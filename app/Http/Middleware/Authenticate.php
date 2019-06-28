@@ -18,6 +18,8 @@ class Authenticate
 
     public function handle($request, Closure $next, $guard = null)
     {
+        config(['auth.defaults.guard' => $guard]);
+
         if (Auth::guard($guard)->guest()) {
             return response('Unauthorized.', 401);
         }

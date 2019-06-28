@@ -6,7 +6,7 @@ namespace App\Repositories\Contracts;
 
 use App\Models\Auth\UserPasswordReset;
 
-interface UserResetPasswordContract extends ModeContract
+interface UserResetPasswordContract extends ModelContract
 {
     public function findForToken(string $token): ?UserPasswordReset;
 

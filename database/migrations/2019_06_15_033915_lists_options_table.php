@@ -15,10 +15,8 @@ class ListsOptionsTable extends Migration
     {
         Schema::create('lists_options', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('model', 45);
-            $table->string('select_name', 100);
-            $table->string('option_name', 100);
-            $table->boolean('option_show')->default(1);
+            $table->bigInteger('lists_selects_id');
+            $table->string('option_name')->unique();
             $table->text('notes')->nullable();
             $table->string('background_color', 20)->nullable(true);
             $table->string('color', 20)->nullable(true);
