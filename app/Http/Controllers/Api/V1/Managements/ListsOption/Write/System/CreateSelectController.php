@@ -20,14 +20,14 @@ class CreateSelectController extends ApiController
     public function __invoke(
         Request $request,
         ListsSelectService $listsSelectService,
-        TransService $transService
+        TransService $transService,
+        CreateSelectForm $createSelectForm
     ) {
 
-        $form = new CreateSelectForm();
-        $form->apiValidate($request);
+        $createSelectForm->apiValidate($request);
 
         try {
-            $select           = $listsSelectService->model($form->getModel())->add($request->only($form->inputs()));
+            $select           = $listsSelectService->model($createSelectForm->getModel())->add($createSelectForm->inputs());
             $formValueForLang = new FormValueForLang($select->select_name, $request->all());
             $transService->add($formValueForLang->result(), false);
             return $this->render();

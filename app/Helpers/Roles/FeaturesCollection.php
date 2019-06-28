@@ -19,6 +19,7 @@ class FeaturesCollection
     {
         $file     = file_get_contents(__DIR__ . '/../../../' . self::$sources[$locate]);
         $xml2Json = json_decode(Xml2Json::fromXml($file));
-        return Arr::pluck($xml2Json, 'feature');
+        $features = Arr::pluck($xml2Json, 'feature');
+        return reset($features);
     }
 }

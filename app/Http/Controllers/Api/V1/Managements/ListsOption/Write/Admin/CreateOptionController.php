@@ -20,9 +20,9 @@ class CreateOptionController extends ApiController
         Request $request,
         ListsSelectsContract $listsSelectContract,
         ListsOptionsContract $listsOptionsContract,
-        TransService $transService
+        TransService $transService,
+        CreateOptionForm $form
     ) {
-        $form = new CreateOptionForm();
         $form->apiValidate($request);
         $listsSelectContract->findOrFail($id);
         $option           = $listsOptionsContract->add($form->inputs());

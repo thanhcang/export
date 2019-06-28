@@ -30,7 +30,7 @@ class CreateSelectForm extends FormValidate
         ], '__');
 
         request()->merge(['select_name' => $selectName]);
-        return ['select_name', 'model'];
+        return request()->only(['select_name', 'model']);
     }
 
 }

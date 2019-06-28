@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Repositories\Contracts\LeadContract;
 use App\Repositories\Contracts\ListsOptionsContract;
 use App\Repositories\Contracts\ListsSelectsContract;
+use App\Repositories\Contracts\RoleContract;
 use App\Repositories\Contracts\TransContact;
 use App\Repositories\Contracts\UserRepoContract;
 use App\Repositories\Contracts\UserResetPasswordContract;
@@ -24,5 +25,6 @@ class RepositoryService extends ServiceProvider
         $this->app->bind(ListsOptionsContract::class, ListsOptionsRepo::class);
         $this->app->bind(ListsSelectsContract::class, ListsSelectsRepo::class);
         $this->app->bind(TransContact::class, TransRepo::class);
+        $this->app->bind(RoleContract::class, RoleRepo::class);
     }
 }

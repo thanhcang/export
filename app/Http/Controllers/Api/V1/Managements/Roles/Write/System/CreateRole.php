@@ -4,9 +4,10 @@
 namespace App\Http\Controllers\Api\V1\Managements\Roles\Write\System;
 
 
-use App\Helpers\Lang\Lang;
-use App\Helpers\Roles\FeaturesCollection;
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\V1\Managements\Roles\Write\System\Forms\FormCreateRole;
+use App\Repositories\Contracts\RoleContract;
+use Illuminate\Http\Request;
 
 class CreateRole extends ApiController
 {
@@ -14,10 +15,11 @@ class CreateRole extends ApiController
 
     protected $gateAbility = 'Roles.Created.Role';
 
-    public function __invoke()
+    public function __invoke(FormCreateRole $formCreateRole, Request $request, RoleContract $roleContract)
     {
         // TODO: Implement __invoke() method
-        $this->push('features', FeaturesCollection::parser(Lang::getLocate()));
+        $formCreateRole->apiValidate($request);
+        $roleContract->add($formCreateRole->inputs());
         return $this->render();
     }
 }
