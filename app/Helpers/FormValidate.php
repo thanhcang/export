@@ -34,5 +34,11 @@ abstract class FormValidate
         }
     }
 
-    abstract function inputs(): array;
+    abstract public function inputs(): array;
+
+    public function __get($name)
+    {
+        // TODO: Implement __get() method.
+        return request()->get($name);
+    }
 }

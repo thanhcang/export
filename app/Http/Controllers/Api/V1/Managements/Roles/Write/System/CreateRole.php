@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class CreateRole extends ApiController
 {
-    protected $checkPermission = false;
+    protected $checkPermission = true;
 
     protected $gateAbility = 'Roles.Created.Role';
 
@@ -19,6 +19,7 @@ class CreateRole extends ApiController
     {
         // TODO: Implement __invoke() method
         $formCreateRole->apiValidate($request);
+        $roleContract->findOrFailByName($formCreateRole->name);
         $roleContract->add($formCreateRole->inputs());
         return $this->render();
     }

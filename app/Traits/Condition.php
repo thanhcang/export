@@ -20,4 +20,9 @@ trait Condition
     {
         return $condition[$key];
     }
+
+    public function forName(string $name)
+    {
+        return ['name' => $name];
+    }
 }

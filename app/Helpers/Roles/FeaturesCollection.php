@@ -15,7 +15,7 @@ class FeaturesCollection
         Lang::VI => 'features_vi.xml',
     ];
 
-    public static function parser(string $locate)
+    public function parser(string $locate)
     {
         $file     = file_get_contents(__DIR__ . '/../../../' . self::$sources[$locate]);
         $xml2Json = json_decode(Xml2Json::fromXml($file));

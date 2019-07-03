@@ -26,7 +26,7 @@ class ContactTable extends Migration
             $table->string('source')->nullable();
             $table->longText('interest')->nullable();
             $table->string('company', 100)->nullable();
-            $table->integer('country_id')->nullable();
+            $table->string('country')->nullable();
             $table->string('address')->nullable();
             $table->string('postal_code')->nullable();
             $table->boolean('notify_to_email')->default(1);

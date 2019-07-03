@@ -20,6 +20,7 @@ class ListsOptionsTable extends Migration
             $table->text('notes')->nullable();
             $table->string('background_color', 20)->nullable(true);
             $table->string('color', 20)->nullable(true);
+            $table->boolean('option_show')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

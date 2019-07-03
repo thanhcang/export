@@ -18,14 +18,9 @@ class ListsSelect extends BaseModel
 
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
-    public function trans()
+    public function options()
     {
-        return $this->hasMany(Trans::class, 'key', 'select_name');
+        return $this->hasMany(ListsOptions::class, 'lists_selects_id');
     }
 
-    public function currentTrans()
-    {
-        return $this->hasOne(Trans::class, 'key', 'select_name')
-                    ->where('lang', Lang::getLocate());
-    }
 }

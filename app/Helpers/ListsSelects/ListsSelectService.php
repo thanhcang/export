@@ -9,6 +9,7 @@ use App\Models\Managements\ListsSelect\CalendarSelects;
 use App\Models\Managements\ListsSelect\LeadsSelects;
 use App\Models\Managements\ListsSelect\PrioritySelects;
 use App\Models\Managements\ListsSelect\RatingSelects;
+use App\Models\Managements\ListsSelect\ZoneSelects;
 use App\Repositories\ListsSelectsRepo;
 use Exception;
 use Illuminate\Support\Arr;
@@ -29,7 +30,8 @@ class ListsSelectService
         CalendarSelects::MODEL_NAME => CalendarSelects::class,
         LeadsSelects::MODEL_NAME    => LeadsSelects::class,
         PrioritySelects::MODEL_NAME => PrioritySelects::class,
-        RatingSelects::MODEL_NAME   => RatingSelects::class
+        RatingSelects::MODEL_NAME   => RatingSelects::class,
+        ZoneSelects::MODEL_NAME     => ZoneSelects::class
     ];
 
     /**

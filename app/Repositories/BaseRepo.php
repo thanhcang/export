@@ -4,6 +4,8 @@
 namespace App\Repositories;
 
 
+use App\Jobs\WriteLogDatabaseJob;
+
 class BaseRepo
 {
     protected $model;
@@ -28,8 +30,23 @@ class BaseRepo
     public function update(int $id, array $data)
     {
         // TODO: Implement update() method.
-        $row = $this->model->find($id);
-        $row->forceFill($data)->save();
+        $row    = $this->model->find($id);
+        $before = clone $row;
+        $row->forceFill($data);
+        $writeLog = $row->getDirty() !== [];
+        $row->save();
+        $after = clone $row;
+
+        if ($writeLog) {
+            dispatch(new WriteLogDatabaseJob(
+                'update',
+                $this->model->getTable(),
+                json_encode($before),
+                json_encode($after),
+                auth()->user()->id
+            ));
+        }
+
         return $row;
     }
 

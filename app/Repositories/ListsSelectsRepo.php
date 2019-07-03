@@ -9,6 +9,7 @@ use App\Helpers\ListsSelects\ListsSelectException;
 use App\Models\Managements\ListsSelect\ListsSelect;
 use App\Repositories\Conditions\ListsSelectsCondition;
 use App\Repositories\Contracts\ListsSelectsContract;
+use Illuminate\Support\Collection;
 
 class ListsSelectsRepo extends BaseRepo implements ListsSelectsContract
 {
@@ -21,31 +22,31 @@ class ListsSelectsRepo extends BaseRepo implements ListsSelectsContract
         $this->model = $model;
     }
 
-    public function getForFunctionSelect(string $name)
+    public function optionsForName(string $name)
     {
         // TODO: Implement getForSelectName() method.
-        $selects = $this->model->with('lang')
-                               ->with('defaultLang')
-                               ->where(['select_name' => $name])
-                               ->where($this->isShow())
-                               ->remember(60)
-                               ->get();
+        $selects = $this->model
+            ->with(
+                [
+                    'options' => function ($q) {
+                        return $q
+                            ->select('id', 'lists_selects_id', 'option_name', 'background_color', 'color', 'notes')
+                            ->with('currentTrans')
+                            ->where($this->isShow())
+                            ->remember(60);
+                    }
+                ]
+            )->where($this->forName($name))->remember(60)->first();
+        $options = new Collection();
 
-        $selects->each(function ($select) {
-
-            if ($select->lang !== null) {
-                $select->option_title = $select->lang->option_title;
-            } elseif ($select->defaultLang !== null) {
-                $select->option_title = $select->defaultLang->option_title;
-            } else {
-                $select->option_title = null;
-            }
-
-            unset($select->lang);
-            unset($select->defaultLang);
+        $selects->options->each(function ($option) use ($options) {
+            $temp = new Collection();
+            $temp->put('id', $option->id);
+            $temp->put('value', $option->currentTrans->value);
+            $options->push($temp);
         });
 
-        return $selects;
+        return $options;
     }
 
     public function delete(int $id)

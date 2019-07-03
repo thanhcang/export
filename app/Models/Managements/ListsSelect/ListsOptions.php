@@ -15,6 +15,10 @@ class ListsOptions extends BaseModel
 
     use SoftDeletes;
 
+    protected $casts = [
+        'option_show' => 'boolean'
+    ];
+
     public function trans()
     {
         return $this->hasMany(Trans::class, 'key', 'option_name');

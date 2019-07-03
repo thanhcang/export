@@ -4,12 +4,15 @@
 namespace App\Repositories\Conditions;
 
 
-use App\Models\Managements\ListsSelect\ListsOptions;
-
 trait ListsSelectsCondition
 {
+    protected function forName(string $name)
+    {
+        return ['select_name' => $name];
+    }
+
     protected function isShow()
     {
-        return ['option_show' => ListsOptions::ENABLE];
+        return ['option_show' => true];
     }
 }

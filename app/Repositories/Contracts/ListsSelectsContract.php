@@ -6,5 +6,5 @@ namespace App\Repositories\Contracts;
 
 interface ListsSelectsContract extends ModelContract
 {
-    public function getForFunctionSelect(string $name);
+    public function optionsForName(string $name);
 }
