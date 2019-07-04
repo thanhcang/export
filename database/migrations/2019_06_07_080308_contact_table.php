@@ -27,12 +27,13 @@ class ContactTable extends Migration
             $table->longText('interest')->nullable();
             $table->string('company', 100)->nullable();
             $table->string('country')->nullable();
+            $table->integer('zone_id');
             $table->string('address')->nullable();
             $table->string('postal_code')->nullable();
-            $table->boolean('notify_to_email')->default(1);
-            $table->boolean('notify_to_whapsapp')->default(1);
-            $table->boolean('notify_to_linked')->default(1);
-            $table->boolean('notify_to_sms')->default(1);
+            $table->boolean('notify_to_email')->default(0);
+            $table->boolean('notify_to_whapsapp')->default(0);
+            $table->boolean('notify_to_linked')->default(0);
+            $table->boolean('notify_to_sms')->default(0);
             $table->longText('comments')->nullable();
             $table->timestamps();
             $table->softDeletes();

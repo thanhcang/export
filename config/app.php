@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Repositories\RepositoryService::class,
         App\Helpers\HelperServiceProvider::class,
+        App\Providers\MinioServiceProvider::class,
     ],
 
     /*
