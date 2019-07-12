@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'gcs'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 'minio'),
+    'cloud' => env('FILESYSTEM_CLOUD', 'gcs'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return [
             'visibility' => 'public',
         ],
 
-        's3'    => [
+        's3'          => [
             'driver' => 's3',
             'key'    => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -63,14 +63,23 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url'    => env('AWS_URL'),
         ],
-        'minio' => [
+        'minio'       => [
             'driver'   => 'minio',
             'key'      => env('MINIO_KEY', 'FLB8FYGBKND5O8UJHLWV'),
             'secret'   => env('MINIO_SECRET', 'XYYMydSBspg+EzBveXwqCLCEa+a78+LzdQ501xY3'),
             'region'   => 'us-east-1',
             'bucket'   => env('MINIO_BUCKET', 'test'),
             'endpoint' => env('MINIO_ENDPOINT', 'http://10.254.212.94:9000')
-        ]
+        ],
+        'gcs' => [
+            'driver' => 'gcs',
+            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'giaiphapapp'),
+            'key_file' => env('GOOGLE_CLOUD_KEY_FILE', '../.rc/giaiphapapp-aa8585108a50.json'), // optional: /path/to/service-account.json
+            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'crm_development'),
+            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', null), // optional: /default/path/to/apply/in/bucket
+            'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', 'https://storage.googleapis.com'), // see: Public URLs below
+            'visibility' => 'public', // optional: public|private
+        ],
 
     ],
 

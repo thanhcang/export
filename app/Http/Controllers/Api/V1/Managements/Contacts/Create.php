@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api\V1\Managements\Contacts;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\V1\Managements\Contacts\Form\FormCreate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Create extends ApiController
 {
@@ -17,8 +18,12 @@ class Create extends ApiController
         // TODO: Implement __invoke() method.
         //$form->apiValidate($request);
         $path = $request->file('avatar')->store(
-            'avatars/'.$request->user()->id, 'minio'
+            'avatars/' . $request->user()->id,['predefinedAcl' => 'publicRead']
         );
-        return $path;
+        $url  = Storage::url($path);
+
+        $this->push('url', $url);
+        return $this->render();
+
     }
 }
